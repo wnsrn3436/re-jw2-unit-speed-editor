@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="MOUSE" id="4">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">with(obj_cei)
+{
+
+var vb_file;
+
+vb_file=file_bin_open(open, 2)
+
+for(i=0; i!=8; i+=1)
+{
+
+file_bin_seek(vb_file, 972+(i*512))
+
+for(j=0; j!=max_d; j+=1)
+{
+if left[i, j]!=0
+{
+file_bin_write_byte(vb_file, left[i, j]+(256-(left[i, j]*2)))
+file_bin_write_byte(vb_file, 255)
+file_bin_write_byte(vb_file, 255)
+file_bin_write_byte(vb_file, 255)
+}
+
+if right[i, j]!=0
+{
+file_bin_write_byte(vb_file, right[i, j])
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+}
+
+if left[i, j]=0 and right[i, j]=0
+{
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+}
+
+if up[i, j]!=0
+{
+file_bin_write_byte(vb_file, up[i, j]+(256-(up[i, j]*2)))
+file_bin_write_byte(vb_file, 255)
+file_bin_write_byte(vb_file, 255)
+file_bin_write_byte(vb_file, 255)
+}
+
+if down[i, j]!=0
+{
+file_bin_write_byte(vb_file, down[i, j])
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+}
+
+if up[i, j]=0 and down[i, j]=0
+{
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+file_bin_write_byte(vb_file, 0)
+}
+}
+
+}
+
+file_bin_close(vb_file)
+
+}
+
+alarm[0]=10
+show_message("완료　　")
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

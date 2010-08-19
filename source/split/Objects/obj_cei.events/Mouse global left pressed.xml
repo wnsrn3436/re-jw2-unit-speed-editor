@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="MOUSE" id="53">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if alarm[0]=-1 and obj_save.alarm[0]=-1 and obj_choose.alarm[0]=-1 and obj_all_set.alarm[0]=-1
+{
+for(i=view*view_mex; i!=view*view_mex+view_mex; i+=1)
+{
+if i&gt;=max_d{break}
+
+vb_up=""; vb_down=""; vb_right=""; vb_left=""
+
+if up[obj_choose.chooses, i-view*view_mex]!=0{vb_up="up - "+string(up[obj_choose.chooses, i])}
+if down[obj_choose.chooses, i-view*view_mex]!=0{vb_down="down - "+string(down[obj_choose.chooses, i])}
+if right[obj_choose.chooses, i-view*view_mex]!=0{vb_right="right - "+string(right[obj_choose.chooses, i])}
+if left[obj_choose.chooses, i-view*view_mex]!=0{vb_left="left - "+string(left[obj_choose.chooses, i])}
+
+if sk_mouse_check(250, 100+((i-view*view_mex)*20), 500, 100+((i-view*view_mex)*20)+20)
+{
+
+var vb_choose;
+
+vb_choose=show_message_ext("변경할 방향을선택하세요　　", "↑변경", "현재 상하방향", "↓변경")
+
+if vb_choose=2
+{
+if up[obj_choose.chooses, i-view*view_mex]!=0{vb_choose=1}
+if down[obj_choose.chooses, i-view*view_mex]!=0{vb_choose=3}
+}
+
+if vb_choose=1
+{
+up[obj_choose.chooses, i-view*view_mex]=get_integer("↑속도", up[obj_choose.chooses, i-view*view_mex])
+down[obj_choose.chooses, i-view*view_mex]=0
+}
+else
+{
+down[obj_choose.chooses, i-view*view_mex]=get_integer("↓속도", down[obj_choose.chooses, i-view*view_mex])
+up[obj_choose.chooses, i-view*view_mex]=0
+}
+
+vb_choose=show_message_ext("변경할 방향을선택하세요　　", "←변경", "현재 좌우방향", "→변경")
+
+if vb_choose=2
+{
+if right[obj_choose.chooses, i-view*view_mex]!=0{vb_choose=3}
+if left[obj_choose.chooses, i-view*view_mex]!=0{vb_choose=1}
+}
+
+if vb_choose=3
+{
+right[obj_choose.chooses, i-view*view_mex]=get_integer("→속도", right[obj_choose.chooses, i-view*view_mex])
+left[obj_choose.chooses, i-view*view_mex]=0
+}
+else
+{
+left[obj_choose.chooses, i-view*view_mex]=get_integer("←속도", left[obj_choose.chooses, i-view*view_mex])
+right[obj_choose.chooses, i-view*view_mex]=0
+}
+
+if up[obj_choose.chooses, i-view*view_mex]&gt;255{up[obj_choose.chooses, i-view*view_mex]=255}
+if down[obj_choose.chooses, i-view*view_mex]&gt;255{down[obj_choose.chooses, i-view*view_mex]=255}
+if left[obj_choose.chooses, i-view*view_mex]&gt;255{left[obj_choose.chooses, i-view*view_mex]=255}
+if right[obj_choose.chooses, i-view*view_mex]&gt;255{right[obj_choose.chooses, i-view*view_mex]=255}
+
+alarm[0]=10
+
+break
+}
+}
+}
+</argument>
+      </arguments>
+    </action>
+    <action id="605" library="1">
+      <!--action name: Comment-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>NONE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">속도변경</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">open=""
+
+max_h=""
+max_d=0
+
+up=0
+down=0
+right=0
+left=0
+
+view=0
+view_mex=15
+
+sk_sex_set_font(1)
+</argument>
+      </arguments>
+    </action>
+    <action id="605" library="1">
+      <!--action name: Comment-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>NONE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">변수선언</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">open=get_open_filename("cei파일을 선택해주세요|*.cei", "")
+
+if open!=""
+{
+var vb_file, vb_read;
+
+vb_file=file_bin_open(open, 0)
+
+file_bin_seek(vb_file, 5080)
+repeat(4){max_h=sk_hex_conversion(file_bin_read_byte(vb_file))+max_h}
+max_d=sk_dec_conversion(max_h)
+//이동그림 최대값
+
+for(i=0; i!=8; i+=1)
+{
+file_bin_seek(vb_file, 972+(i*512))
+
+for(j=0; j!=max_d; j+=1)
+{
+up[i, j]=0; down[i, j]=0; left[i, j]=0; right[i, j]=0
+
+vb_read=""
+repeat(4){vb_read=sk_hex_conversion(file_bin_read_byte(vb_file))+vb_read}
+
+if string_delete(vb_read, 3, string_length(vb_read))="FF"{left[i, j]=256-sk_dec_conversion(string_delete(vb_read, 1, 6))}
+else{right[i, j]=sk_dec_conversion(string_delete(vb_read, 1, 6))}
+//홀수
+
+vb_read=""
+repeat(4){vb_read=sk_hex_conversion(file_bin_read_byte(vb_file))+vb_read}
+
+if string_delete(vb_read, 3, string_length(vb_read))="FF"{up[i, j]=256-sk_dec_conversion(string_delete(vb_read, 1, 6))}
+else{down[i, j]=sk_dec_conversion(string_delete(vb_read, 1, 6))}
+//짝수
+}
+
+}
+
+file_bin_close(vb_file)
+}
+else
+{
+game_end()
+}
+</argument>
+      </arguments>
+    </action>
+    <action id="605" library="1">
+      <!--action name: Comment-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>NONE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">cei 로드</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="sk_hex_conversion" type="RESOURCE"/>
+  <resource name="sk_dec_conversion" type="RESOURCE"/>
+  <resource name="sk_mouse_check" type="RESOURCE"/>
+  <resource filename="sefx_v2_0" name="sefx_v2.0" type="GROUP"/>
+</resources>

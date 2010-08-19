@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="spr_cei" type="RESOURCE"/>
+  <resource name="spr_save" type="RESOURCE"/>
+  <resource name="spr_choose" type="RESOURCE"/>
+  <resource name="spr_view" type="RESOURCE"/>
+  <resource name="spr_all_set" type="RESOURCE"/>
+  <resource name="spr_kor1" type="RESOURCE"/>
+  <resource name="spr_kor2" type="RESOURCE"/>
+</resources>

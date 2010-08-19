@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="MOUSE" id="4">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">chooses=show_menu("↑|↗|→|↘|↓|↙|←|↖", chooses)
+
+switch(chooses)
+{
+case 0: chooses_st="위"; break;
+case 1: chooses_st="위 오른쪽"; break;
+case 2: chooses_st="오른쪽"; break;
+case 3: chooses_st="아래 오른쪽"; break;
+case 4: chooses_st="아래"; break;
+case 5: chooses_st="아래 왼쪽"; break;
+case 6: chooses_st="왼쪽"; break;
+case 7: chooses_st="위 왼쪽"; break;
+}
+
+alarm[0]=10
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

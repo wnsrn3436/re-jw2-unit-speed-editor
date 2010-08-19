@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">draw_sprite(sprite_index, image_index, x, y)
+
+sk_sex_set_font(0)
+sk_sex_kr_smiddle(320, 30, "["+filename_name(open)+"]", c_blue)
+sk_sex_set_font(1)
+
+var vb_up, vb_down, vb_right, vb_left;
+
+for(i=view*view_mex; i!=view*view_mex+view_mex; i+=1)
+{
+if i&gt;=max_d{break}
+
+vb_up=""; vb_down=""; vb_right=""; vb_left=""
+
+if up[obj_choose.chooses, i-view*view_mex]!=0{vb_up="up - "+string(up[obj_choose.chooses, i])}
+if down[obj_choose.chooses, i-view*view_mex]!=0{vb_down="down - "+string(down[obj_choose.chooses, i])}
+if right[obj_choose.chooses, i-view*view_mex]!=0{vb_right="right - "+string(right[obj_choose.chooses, i])}
+if left[obj_choose.chooses, i-view*view_mex]!=0{vb_left="left - "+string(left[obj_choose.chooses, i])}
+
+if sk_mouse_check(250, 100+((i-view*view_mex)*20), 500, 100+((i-view*view_mex)*20)+20)
+{
+draw_text(260, 100+((i-view*view_mex)*20), "["+string(i)+"] "+vb_up+" "+vb_down+" "+vb_right+" "+vb_left)
+}
+else
+{
+draw_set_alpha(0.5)
+draw_set_color(c_blue)
+draw_text(260, 100+((i-view*view_mex)*20), "["+string(i)+"] "+vb_up+" "+vb_down+" "+vb_right+" "+vb_left)
+draw_set_color(c_black)
+draw_set_alpha(1)
+}
+}
+
+sk_sex_kr_smiddle(obj_choose.x, obj_choose.y+20, "view : "+string(view), c_black)
+
+if max_d&gt;view*view_mex+view_mex
+{
+sk_sex_kr_smiddle(obj_choose.x, obj_choose.y+40, "view["+string(view*view_mex+view_mex)+"/"+string(max_d)+"]", c_black)
+}
+else
+{
+sk_sex_kr_smiddle(obj_choose.x, obj_choose.y+40, "view["+string(max_d)+"/"+string(max_d)+"]", c_black)
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

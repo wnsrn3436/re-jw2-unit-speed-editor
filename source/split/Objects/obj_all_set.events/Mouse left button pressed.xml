@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="MOUSE" id="4">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">with(obj_cei)
+{
+
+var vb_choose;
+
+vb_choose=show_message_ext("변경할 방향을선택하세요　　", "↑변경", "", "↓변경")
+
+if vb_choose=1
+{
+up[obj_choose.chooses, 0]=get_integer("↑속도", up[obj_choose.chooses, 0])
+if up[obj_choose.chooses, 0]&gt;255{up[obj_choose.chooses, 0]=255}
+
+for(i=0; i!=max_d; i+=1)
+{
+up[obj_choose.chooses, i]=up[obj_choose.chooses, 0]
+down[obj_choose.chooses, i]=0
+}
+}
+else
+{
+down[obj_choose.chooses, 0]=get_integer("↓속도", down[obj_choose.chooses, 0])
+if down[obj_choose.chooses, 0]&gt;255{down[obj_choose.chooses, 0]=255}
+
+for(i=0; i!=max_d; i+=1)
+{
+down[obj_choose.chooses, i]=down[obj_choose.chooses, 0]
+up[obj_choose.chooses, i]=0
+}
+}
+
+vb_choose=show_message_ext("변경할 방향을선택하세요　　", "←변경", "", "→변경")
+
+if vb_choose=3
+{
+right[obj_choose.chooses, 0]=get_integer("→속도", right[obj_choose.chooses, 0])
+if right[obj_choose.chooses, 0]&gt;255{right[obj_choose.chooses, 0]=255}
+
+for(i=0; i!=max_d; i+=1)
+{
+right[obj_choose.chooses, i]=right[obj_choose.chooses, 0]
+left[obj_choose.chooses, i]=0
+}
+}
+else
+{
+left[obj_choose.chooses, 0]=get_integer("←속도", left[obj_choose.chooses, 0])
+if left[obj_choose.chooses, 0]&gt;255{left[obj_choose.chooses, 0]=255}
+
+for(i=0; i!=max_d; i+=1)
+{
+left[obj_choose.chooses, i]=left[obj_choose.chooses, 0]
+right[obj_choose.chooses, i]=0
+}
+}
+
+alarm[0]=10
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

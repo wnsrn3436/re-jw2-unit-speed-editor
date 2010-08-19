@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="obj_cei" type="RESOURCE"/>
+  <resource name="obj_save" type="RESOURCE"/>
+  <resource name="obj_choose" type="RESOURCE"/>
+  <resource name="obj_view_1" type="RESOURCE"/>
+  <resource name="obj_view_2" type="RESOURCE"/>
+  <resource name="obj_all_set" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if obj_cei.max_d&gt;obj_cei.view*obj_cei.view_mex+obj_cei.view_mex
+{
+draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, 0, -1, 1)
+}
+else
+{
+draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, 0, -1, 0.5)
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
