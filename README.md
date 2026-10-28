@@ -1,5 +1,7 @@
 # Jurassic Primitive War 2 Unit-Speed Editor
 
+[한국어](README.ko.md)
+
 In Jurassic Primitive War 2, a unit's movement speed is stored per animation frame inside its stats file (CEI). This editor lists those values and lets you pick and change them.
 
 The analysis is written up in [docs/cei-speed-format.md](docs/cei-speed-format.md).
@@ -11,18 +13,18 @@ The analysis is written up in [docs/cei-speed-format.md](docs/cei-speed-format.m
 
 ## How to use
 
-Download from Releases, extract and run it, and a file dialog opens right away. Pick a unit's `.cei` and the per frame speeds appear as a list.
+Download it from Releases, extract it and run it, and a file dialog opens right away. Pick a unit's `.cei` file and the per-frame speeds appear as a list.
 
-The button in the top right chooses which of the eight directions to view. The list shows 15 entries at a time, with arrows on either side to page through.
+Use the button in the top right to choose which of the eight directions to view. The list shows 15 entries at a time, with arrows on either side to page through.
 
-Click a row to change a value. It asks for the vertical direction and the horizontal direction in turn and takes a number for each. `속도 전체변경` sets every frame of the current direction to one value.
+Clicking a row prompts for the vertical direction, then the horizontal direction, and sets the value to the numbers you enter. `속도 전체변경` sets every frame of the direction currently shown to one value.
 
-`저장` overwrites the original CEI in place. There is no undo, so back it up first.
+Pressing `저장` overwrites the original CEI in place. There is no way to undo this, so it is a good idea to back up the file first.
 
 
 ## How it works
 
-**Speeds are stored per direction, 8 bytes per frame.** Starting at `0x3CC` in the CEI, eight direction blocks follow at `0x200` intervals, and within each block a frame is 4 bytes of horizontal speed and 4 bytes of vertical speed. A block of `0x200` caps each direction at 64 frames. The frame count sits at `0x13D8` as a 4 byte value, twelve bytes past the end of the speed region at `0x13CC`, so that is read first and only that many frames are scanned.
+**Speeds are stored per direction, 8 bytes per frame.** Starting at `0x3CC` in the CEI, eight direction blocks follow at `0x200` intervals, and within each block a frame is 4 bytes of horizontal speed and 4 bytes of vertical speed. Because each block is `0x200` bytes, a direction can hold at most 64 frames. The frame count is a 4-byte value at `0x13D8`, twelve bytes past `0x13CC` where the speed region ends, so the editor reads it first and scans only that many frames.
 
 ```gml
 file_bin_seek(vb_file, 5080)                     // 0x13D8, frame count
@@ -39,9 +41,9 @@ for(i=0; i!=8; i+=1)                             // eight directions
 }
 ```
 
-The `972`, `512` and `5080` in the source are decimal. They are the same values as `0x3CC`, `0x200` and `0x13D8` in the analysis.
+The `972`, `512` and `5080` in the source are all decimal. They are the same values as `0x3CC`, `0x200` and `0x13D8` in the analysis.
 
-**Negatives are detected from the top byte.** The values are 4 byte signed integers, so a speed going left or up is stored as `FFFFFFxx`. The first two characters of the assembled hex string are checked for `FF`, and if they match the magnitude is `256 - low byte` and it is classed as left or up. Otherwise it is right or down. That is why the screen shows direction names instead of signs.
+**Negatives are detected from the top byte.** The values are 4-byte signed integers, so a speed going left or up is stored as `FFFFFFxx`. The editor checks whether the assembled hex string starts with `FF`, and if it does, it takes `256 - low byte` as the magnitude and classes the value as left or up. Otherwise it is right or down. That is why the screen shows direction names instead of signs.
 
 ```gml
 vb_read=""
@@ -53,7 +55,7 @@ else
 { right[i, j] = sk_dec_conversion(string_delete(vb_read, 1, 6)) }
 ```
 
-**Saving runs that conversion in reverse.** If a left or up value is present, `256 - value` goes in the low byte and the other three bytes are filled with `FF`. For right or down the value is written as is and the other three bytes are `0`. If both are 0, all four bytes are 0.
+**Saving runs that conversion in reverse.** If a left or up value is present, `256 - value` is written as the low byte and the other three bytes are filled with `FF`. For right or down the value is written as is and the other three bytes get `0`. If both are 0, all four bytes are 0.
 
 ```gml
 if left[i, j]!=0
@@ -65,7 +67,7 @@ if left[i, j]!=0
 }
 ```
 
-One frame cannot hold both up and down, and the same goes for left and right. Filling one clears the other to 0. Input is capped at 255.
+One frame cannot hold both up and down, and the same goes for left and right, so filling one clears the other to 0. Input is capped at 255.
 
 
 ## Files
@@ -81,7 +83,7 @@ One frame cannot hold both up and down, and the same goes for left and right. Fi
 
 ## Credits
 
-The Korean text scripts under `source/split/Scripts/sefx_v2_0/` were written by 김게맛 (sodium031) of the GameMaker community.
+The Korean text output scripts (`source/split/Scripts/sefx_v2_0/`) were made by 김게맛 (sodium031) of the GameMaker community.
 
 
 ## License
